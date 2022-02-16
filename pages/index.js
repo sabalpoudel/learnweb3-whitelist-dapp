@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import Web3Modal from "web3modal";
 import { providers, Contract } from "ethers";
 import { useEffect, useRef, useState } from "react";
@@ -14,7 +13,7 @@ export default function Home() {
 
   const [loading, setLoading] = useState(false);
 
-  const [whitelistedAddressCount, setWhitelistedAddressCount] = useState(0);
+  const [numAddressesWhitelisted, setNumAddressesWhitelisted] = useState(0);
 
   const web3ModalRef = useRef();
 
@@ -69,9 +68,9 @@ export default function Home() {
         provider
       );
 
-      const _whitelistedAddressCount =
-        await whitelistContract.whitelistedAddressCount();
-      setWhitelistedAddressCount(_whitelistedAddressCount);
+      const _numAddressesWhitelisted =
+        await whitelistContract.numAddressesWhitelisted();
+      setNumAddressesWhitelisted(_numAddressesWhitelisted);
     } catch (error) {
       console.error({ getNumberOfWhitelistedErr: error });
     }
@@ -160,7 +159,7 @@ export default function Home() {
             Its an NFT collection for developers in Crypto.
           </div>
           <div className={styles.description}>
-            {whitelistedAddressCount} have already joined the Whitelist
+            {numAddressesWhitelisted} have already joined the Whitelist
           </div>
           {renderButton()}
         </div>
